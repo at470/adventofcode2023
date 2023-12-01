@@ -42,9 +42,9 @@ def extract_and_sum_two_digits_from_line(extracted_numbers_from_string):
 		extracted_two_digit_numbers.append(int(two_digit_number_from_line))
 	return sum(extracted_two_digit_numbers)
 
-# path = '/Users/akiko/Projects/adventofcode2023/adventofcode2023/day01/partonesample.csv'
-# path = '/Users/akiko/Projects/adventofcode2023/adventofcode2023/day01/parttwosample.csv'
-path = '/Users/akiko/Projects/adventofcode2023/adventofcode2023/day01/input.csv'
+# path = '/Users/akiko/Projects/adventofcode2023/adventofcode2023/day01/akiko/partonesample.csv'
+# path = '/Users/akiko/Projects/adventofcode2023/adventofcode2023/day01/akiko/parttwosample.csv'
+path = '/Users/akiko/Projects/adventofcode2023/adventofcode2023/day01/akiko/input.csv'
 raw_data = open(path, "r").read().splitlines()
 # raw_data = ['foureight48sbkkvc17zbksgvcbb', '4sixfiveone76jctmjsxdh5jrkv', 'nine296']
 # raw_data = ['mdjphcm9', 'foureightmppchbgz8lqbzqbjztwo7cksqxns', '553fivethreefour8nine']
