@@ -1,3 +1,13 @@
+# Data cleaning -> get game data for Parts 1 and 2
+def make_set_result_dict(input_result_list):
+	set_result = {'red' : 0, 'green' : 0, 'blue' : 0}
+	for x in input_result_list:
+		# ['1', 'red']
+		cube_number = x[0]
+		cube_colour = x[1]
+		set_result[cube_colour] = int(cube_number)
+	return set_result
+
 # Part 1
 def is_game_result_invalid(bag_content, game_result):
 	bag_result_comparison_var = [(bag_cube_colour, game_result[bag_cube_colour], bag_cube_num) for bag_cube_colour, bag_cube_num in bag_content.items()]
@@ -8,7 +18,7 @@ def is_game_result_invalid(bag_content, game_result):
 		# print(colour_comparison, game_cube_num > bag_cube_num)
 		if game_cube_num > bag_cube_num:
 			result = True
-			return result
+			return result # TODO: I don't think this bit is working - I want this function to stop and this for loop to break
 		else:
 			result = False
 	return result
@@ -28,16 +38,6 @@ def get_min_cubes_per_game(game_result):
 		if cube_results['green'] > min_cube_per_game['green']:
 			min_cube_per_game['green'] = cube_results['green']
 	return min_cube_per_game
-
-# Data cleaning
-def make_set_result_dict(input_result_list):
-	set_result = {'red' : 0, 'green' : 0, 'blue' : 0}
-	for x in input_result_list:
-		# ['1', 'red']
-		cube_number = x[0]
-		cube_colour = x[1]
-		set_result[cube_colour] = int(cube_number)
-	return set_result
 
 # path = '/Users/akiko/Projects/adventofcode2023/adventofcode2023/day02/akiko/sample.csv'
 path = '/Users/akiko/Projects/adventofcode2023/adventofcode2023/day02/akiko/input.csv'
@@ -90,7 +90,6 @@ for level1 in temp4:
 
 
 # Part 1
-# actual bag content
 # 12 red cubes, 13 green cubes, and 14 blue cubes
 bag_content = {'red' : 12, 'green' : 13, 'blue' : 14}
 
@@ -100,12 +99,11 @@ for index, game in enumerate(games):
 	game_id = index + 1
 	all_game_ids.append(game_id)
 	for outcome in game:
-		if is_game_result_invalid(bag_content, outcome) == True:
+		if is_game_result_invalid(bag_content, outcome):
 			invalid_game_ids.append(game_id)
 
-set_invalid_game_ids = set(invalid_game_ids)
-
-# TODO: fix this to have a deduped list!
+print(invalid_game_ids)
+set_invalid_game_ids = set(invalid_game_ids) # TODO: fix this to have a deduped list!
 # currently cheating by using set ><
 
 sum_valid_game_ids = sum(all_game_ids) - sum(set_invalid_game_ids)
@@ -114,7 +112,6 @@ print(sum_valid_game_ids)
 
 # Part 2
 # fewest number of cubes of each color
-
 power_per_game = []
 for each_game in games:
 	min_cubes = get_min_cubes_per_game(each_game)
