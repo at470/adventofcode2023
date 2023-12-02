@@ -1,6 +1,6 @@
 import argparse
 
-from parts import one
+from parts import one, two
 
 
 def get_file(filename: str) -> list[str]:
@@ -26,7 +26,7 @@ def main() -> None:
     if int(args.part) == 1:
         one.solve(lines)
     else:
-        raise NotImplementedError
+        two.solve(lines)
 
 
 if __name__ == "__main__":
