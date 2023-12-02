@@ -1,26 +1,4 @@
-# sample bag content
-# #'12 red cubes, 13 green cubes, and 14 blue cubes'
-# bag_content = {'red' : 12,
-# 			   'green' : 13,
-# 			   'blue' : 14}
-# # wanted input
-# # NB.  index of games = game id - 1
-# games = [[{'red' : 4, 'green' : 0, 'blue' : 3}, 
-# 		 {'red' : 1, 'green' : 2, 'blue' : 6}, 
-# 		 {'red' : 0, 'green' : 2, 'blue' : 0}], 
-# 		[{'red' : 0, 'green' : 2, 'blue' : 1}, 
-# 		 {'red' : 1, 'green' : 3, 'blue' : 4}, 
-# 		 {'red' : 0, 'green' : 1, 'blue' : 1}],
-# 		[{'red' : 20, 'green' : 8, 'blue' : 6}, 
-# 		 {'red' : 4, 'green' : 13, 'blue' : 5}, 
-# 		 {'red' : 1, 'green' : 5, 'blue' : 0}],
-# 		[{'red' : 3, 'green' : 1, 'blue' : 6}, 
-# 		 {'red' : 6, 'green' : 3, 'blue' : 0}, 
-# 		 {'red' : 14, 'green' : 3, 'blue' : 15}],
-# 		[{'red' : 6, 'green' : 3, 'blue' : 1}, 
-# 		 {'red' : 1, 'green' : 2, 'blue' : 2}] ]
-
-
+# Part 1
 def is_game_result_invalid(bag_content, game_result):
 	bag_result_comparison_var = [(bag_cube_colour, game_result[bag_cube_colour], bag_cube_num) for bag_cube_colour, bag_cube_num in bag_content.items()]
 	# bag_result_comparison_var = [('red', 20, 12), ('green', 8, 13), ('blue', 6, 14)]
@@ -34,6 +12,22 @@ def is_game_result_invalid(bag_content, game_result):
 		else:
 			result = False
 	return result
+
+# Part 2
+def get_min_cubes_per_game(game_result):
+	# game_result = [{'red' : 4, 'green' : 0, 'blue' : 3}, 
+# 		 {'red' : 1, 'green' : 2, 'blue' : 6}, 
+# 		 {'red' : 0, 'green' : 2, 'blue' : 0}]
+	min_cube_per_game = {'red' : 0, 'green' : 0, 'blue' : 0}
+	for cube_results in game_result:
+		# {'red' : 4, 'green' : 0, 'blue' : 3}
+		if cube_results['red'] > min_cube_per_game['red']:
+			min_cube_per_game['red'] = cube_results['red']
+		if cube_results['blue'] > min_cube_per_game['blue']:
+			min_cube_per_game['blue'] = cube_results['blue']
+		if cube_results['green'] > min_cube_per_game['green']:
+			min_cube_per_game['green'] = cube_results['green']
+	return min_cube_per_game
 
 # Data cleaning
 def make_set_result_dict(input_result_list):
@@ -109,14 +103,23 @@ for index, game in enumerate(games):
 		if is_game_result_invalid(bag_content, outcome) == True:
 			invalid_game_ids.append(game_id)
 
+set_invalid_game_ids = set(invalid_game_ids)
+
 # TODO: fix this to have a deduped list!
 # currently cheating by using set ><
 
-print(all_game_ids, invalid_game_ids)
-
-set_invalid_game_ids = set(invalid_game_ids)
-
 sum_valid_game_ids = sum(all_game_ids) - sum(set_invalid_game_ids)
 print(sum_valid_game_ids)
+# 2369
 
-# 530 TOO LOW
+# Part 2
+# fewest number of cubes of each color
+
+power_per_game = []
+for each_game in games:
+	min_cubes = get_min_cubes_per_game(each_game)
+	power_of_min_set_of_cubes_per_game = min_cubes['red'] * min_cubes['blue'] * min_cubes['green']
+	power_per_game.append(power_of_min_set_of_cubes_per_game)
+
+print(sum(power_per_game))
+# 66363
