@@ -17,11 +17,8 @@ def is_game_result_invalid(bag_content, game_result):
 		bag_cube_num = colour_comparison[2]
 		# print(colour_comparison, game_cube_num > bag_cube_num)
 		if game_cube_num > bag_cube_num:
-			result = True
-			return result # TODO: I don't think this bit is working - I want this function to stop and this for loop to break
-		else:
-			result = False
-	return result
+			return True 
+	return False
 
 # Part 2
 def get_min_cubes_per_game(game_result):
@@ -101,12 +98,11 @@ for index, game in enumerate(games):
 	for outcome in game:
 		if is_game_result_invalid(bag_content, outcome):
 			invalid_game_ids.append(game_id)
+			break # this was the key bit!
 
-print(invalid_game_ids)
-set_invalid_game_ids = set(invalid_game_ids) # TODO: fix this to have a deduped list!
-# currently cheating by using set ><
+# print(invalid_game_ids)
 
-sum_valid_game_ids = sum(all_game_ids) - sum(set_invalid_game_ids)
+sum_valid_game_ids = sum(all_game_ids) - sum(invalid_game_ids)
 print(sum_valid_game_ids)
 # 2369
 
