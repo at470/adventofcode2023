@@ -98,7 +98,7 @@ for index, game in enumerate(games):
 	for outcome in game:
 		if is_game_result_invalid(bag_content, outcome):
 			invalid_game_ids.append(game_id)
-			break # this was the key bit!
+			break # this was the key bit! this will break out of this loop as soon as game result is invalid.
 
 # print(invalid_game_ids)
 
