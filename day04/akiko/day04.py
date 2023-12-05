@@ -72,11 +72,7 @@ def calculate_points(num_matches):
 			count+= 1
 	return points
 
-# Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53
-# card = [[41, 48, 83, 86, 17], [83, 86, 6, 31, 17, 9, 48, 53]]
-# all_scratchcards = [[[41, 48, 83, 86, 17], [83, 86, 6, 31, 17, 9, 48, 53]], 
-# 			 [[13, 32, 20, 16, 61],[61, 30, 68, 82, 17, 32, 24, 19]]]
-
+# Part 1
 total_matches_per_card = []
 for card in all_scratchcards:
 	total_matches_per_card.append(number_of_matches_for_card(card))
